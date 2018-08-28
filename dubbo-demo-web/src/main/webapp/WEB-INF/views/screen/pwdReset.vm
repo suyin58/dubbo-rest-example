@@ -1,0 +1,153 @@
+<style>
+	.bui-drag-line{
+		position: absolute;
+		border-left: 1px solid #ccc;
+	}
+.form-horizontal .control-tree-row-auto {
+    height: auto;
+}
+
+.bui-dialog .bui-tree-stdmod-body {
+    padding: 0px;
+}
+</style>
+
+
+<div id="content" class="hidden">   
+<form id="PwdResetForm" class="form-horizontal">
+     <div class="row">
+		<div class="control-group span9">
+         <label class="control-label">机构代码：</label>
+         <div class="controls">
+           <input type="text" style="width:200px;" id="txtOrgCode" class="control-text" name="orgCode" value="$!{LOGINED.orgCode}">
+         </div>
+       </div>
+	   </div>
+	   <div  class="row">
+       <div class="control-group span9">
+         <label class="control-label">用户名：</label>
+         <div class="controls">
+           <input type="text" style="width:200px;" id="txtOperCode" class="control-text" name="operCode" value="$!{LOGINED.operCode}">
+         </div>
+       </div>
+	   </div>
+	   <div  class="row">
+       <div class="control-group span9">
+         <label class="control-label"><s>*</s>输入新密码：</label>
+         <div class="controls">
+           <input type="password" style="width:200px;" id="txtOperPwd" class="control-text" name="operPwd" >
+         </div>
+       </div>
+     </div>
+	 <div  class="row">
+       <div class="control-group span9">
+         <label class="control-label"><s>*</s>确认新密码：</label>
+         <div class="controls">
+           <input type="password" style="width:200px;" id="txtComfirPwd" class="control-text" name="comfirmOperPwd" >
+         </div>
+       </div>
+     </div>
+	 <div  class="row">
+       <div class="control-group span9" style="text-align:center;">
+			<P id="errInfo"></p>
+       </div>
+     </div>
+   </form>
+  </div>
+
+<script type="text/javascript">
+$(document).ready(function () {
+		var sysTitle = '网金所合作机构平台';
+		var url = "$!{contextPath}/channelLogin/login.json";
+		var loginPage="$!{contextPath}/channelLogin/login.htm";
+		var indexPage = "$!{contextPath}/channelLogin/chlIndex.htm"; 
+
+		var orgCode=$.trim($("#txtOrgCode").val());
+		document.title=sysTitle;
+
+		$("#txtOrgCode").attr("disabled", true);
+		$("#txtOperCode").attr("disabled", true);
+		
+	function resetpwd(){
+	    $('#errInfo').html('');
+		var isSubmit="true";
+		//1、校验必填项
+		 $(".control-text").each(function(i, obj) {
+            if ($(obj).val() == "") {
+				//$('#errInfo').html('<font color="red">必填项，不允许为空！</font>');
+                $(this).css("border-color", "red");
+                $(this).focus();
+				isSubmit="false";
+                return false;
+            }
+        });
+		
+	 	//2、判断密码输入是否一致
+    	var operCode=$.trim($("#txtOperCode").val());
+    	var operPwd=$.trim($("#txtOperPwd").val());
+    	var comfirmPwd=$.trim($("#txtComfirPwd").val());
+		if(operPwd!=comfirmPwd)
+		{
+			$('#errInfo').html('<font color="red">两次密码输入不一致！</font>');
+			isSubmit="false";
+		 	return false;
+		}
+    	//2、提交密码重置修改请求	
+		if(isSubmit=="true"){
+    	     $.ajax({  
+                async:false,//使用同步的Ajax请求  
+                type: "POST",  
+                url: "$!{contextPath}/system/operators/pwdReset.json",  
+                data: "operCode="+operCode+"&operPwd="+$.md5(operPwd),  
+                success: function(result){  
+					if(result.success){
+        				   BUI.Message.Alert('密码修改成功!',function() {
+								//提交登录请求
+                        		param = {"orgCode":orgCode,"operCode":operCode,"operPwd":$.md5(operPwd)};
+                        		$.post(url,param,function(result){
+                        				if(result.success){
+                        					location.href = indexPage;
+                        				}else{
+                        					location.href = "$!{contextPath}/exception/500.htm";
+                        				}
+                        		});
+                          },'info');
+					 }else if(result.errorNo=="-1"){
+					  	BUI.Message.Alert(result.errorInfo,'warning');
+					 }
+                }  
+        });
+		}
+	}
+
+
+    var Overlay = BUI.Overlay,
+    Form = BUI.Form;
+    
+      var form = new Form.Form({
+        srcNode : '#PwdResetForm'
+      }).render();
+ 
+      var dialog = new Overlay.Dialog({
+            title:'密码修改',
+            width:450,
+            height:280,
+            //配置DOM容器的编号
+            contentId:'content',
+            success:function () {
+			  resetpwd();
+            }
+          });
+      dialog.show();
+	  
+	  $(".bui-ext-close").css("display","none");
+	  var btns=$(".bui-stdmod-footer button");
+		btns.each(function(i, obj) {
+            if ($(obj).text()== "取消"||$(obj).text() == "关闭") {
+                $(this).hide();
+            }
+      });
+});
+
+
+    </script>

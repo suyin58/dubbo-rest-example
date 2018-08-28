@@ -1,0 +1,47 @@
+﻿.bui-grid-bbar{
+		position:relative;
+		
+	}
+	.bui-grid-bbar .tablePanel{
+		position:absolute;
+		right:480px;
+		text-align:center;
+		width : 400px;
+		background-color : #fff;
+	}
+	
+	.tableButton{
+		margin-right : 3px;
+		background-color : #fff;
+		height : 27px;
+		line-height : 27px;
+		display:inline-block;
+		width:60px
+	}
+	.tableButton:hover{
+		cursor:pointer;
+	}
+	.display-tableButton{
+		display:inline-block;
+		width:60px;
+		background-color : #eee;
+		text-align:center;
+			height : 10px;
+			line-height:10px;
+		border-radius : 3px;
+	}
+	.display-tableButton:hover{
+		background : #ddd;
+	}
+	.bui-grid-width .bui-grid-body {
+    	position:relative;
+	}
+	.display-tableButton.active{
+		background-color : #357ebd;
+	}
+.bui-grid-header-container.header-title-fixed {
+    background-color: #fff;
+    position: fixed;
+    top: 0;
+    z-index: 100;
+}

@@ -1,0 +1,59 @@
+使用postman模拟文件请求的时候，由于enctype不是multipart/form-data会出现 415 unsupport media type的错误
+<br/>
+单个文件上传：使用MultipartFormDataInput：保存D:/temp/datainput/ <br/>
+采用MultipartFormDataInput的方法，form表单中的非file文件其他参数后台获取不到。<br/>需要将其他参数作为PathParam或者QueryParam传递。
+<br/>
+<form action="http://127.0.0.1:9090/file/upload?name=aaa" accept-charset="UTF-8" method="post" enctype="multipart/form-data">
+	测试参数age<input type="input" name="age" id="age" value="15"/><br/>
+	文件：<input type="file" name="file" id="file" value=""/><br/>
+	<input type="submit" value="提交" />
+</form>
+<br/>
+单个文件上传：使用MultipartForm:保存：D:/temp/form/ <br/>
+使用@MultipartForm，暂时无法获取到fileName属性，详见：https://issues.jboss.org/browse/RESTEASY-1069?_sscc=t<br/>
+如果有必要的话，前端可以通过js的方式将fileName作为一个Form元素传递给后台。
+<br/>
+<form action="http://127.0.0.1:9090/file/up?name=aaa" accept-charset="UTF-8" method="post" enctype="multipart/form-data">
+	测试参数age<input type="input" name="age" id="age" value="15"/><br/>
+	文件名称<input type="input" name="fileName" id="fileName0" readonly=readonly value=""/><br/>
+	文件：<input type="file" name="file" id="file0" onchange="change(0);" value=""/><br/>
+	<input type="submit" value="提交" />
+</form>
+
+
+
+多个文件上传：使用MultipartFormDataInput：保存D:/temp/datainputmulti/ <br/>
+采用MultipartFormDataInput的方法，form表单中的非file文件其他参数后台获取不到。<br/>需要将其他参数作为PathParam或者QueryParam传递。
+<br/>
+<form action="http://127.0.0.1:9090/file/uploadmulti" accept-charset="UTF-8" method="post" enctype="multipart/form-data">
+	文件1：<input type="file" name="file1" id="file" value=""/><br/>
+	文件1：<input type="file" name="file2" id="file" value=""/><br/>
+	<input type="submit" value="提交" />
+</form>
+<br/>
+多个文件上传：使用MultipartForm:保存：D:/temp/formmulti/ <br/>
+不支持，后台获取不到file信息
+<br/>
+<form action="http://127.0.0.1:9090/file/upmulti" accept-charset="UTF-8" method="post" enctype="multipart/form-data">
+	文件名称<input type="input" name="fileName1" id="fileName1" readonly=readonly value=""/><br/>
+	文件：<input type="file" name="file" id="file1" onchange="change(1);" value=""/><br/>
+	文件名称<input type="input" name="fileName2" id="fileName2" readonly=readonly value=""/><br/>
+	文件：<input type="file" name="file" id="file2" onchange="change(2);" value=""/><br/>
+	<!-- MultipartForm不支持
+	<input type="submit" value="提交" />
+	-->
+</form>
+
+
+
+<script type="text/javascript">
+function change(arg) {	
+	var obj = document.getElementById("file"+arg);
+	var len = obj.files.length;
+	for (var i = 0; i < len; i++) {
+		document.getElementById("fileName"+arg).value=obj.files[i].name;
+	}
+}
+</script>
+
+

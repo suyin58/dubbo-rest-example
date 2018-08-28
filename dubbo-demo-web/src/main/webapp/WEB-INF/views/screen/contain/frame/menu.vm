@@ -1,0 +1,152 @@
+#if($frame.menu)
+<div fit="true" class="h-menu layout" $horn.paramsCache($frame.menu)>
+	#set($menuSelectItemId = "")
+	#foreach($menuItem in $frame.menu.items)
+		#if($velocityCount ==1)
+			#set($menuSelectItemId = ${menuItem.id})
+		#end
+		#if($menuItem.selected == true)
+			#set($menuSelectItemId = ${menuItem.id})
+			#break
+		#end
+	#end
+	#foreach($menuItem in $frame.menu.items)
+		<div menuId="$!{menuItem.id}" #if($menuItem.id == $menuSelectItemId)class="h-menu-con h-show" #else class="h-menu-con" #end >
+            <div class="h-menu-header"><i title="菜单展开/收缩"></i><span>${menuItem.title}</span></div>
+			<div class="h-menu-scroll" style="display:none;"><i></i></div>
+            <div class="h-menu-body">
+				
+                <ul>
+					#foreach($subMenuItem in $menuItem.items)
+						#set($menuIcon=$subMenuItem.icon)
+						<li menuId="$!{subMenuItem.id}" parentMenu="$!{menuItem.id}">
+							##一级菜单#
+							<a href="javascript:void(0)" title="$!{subMenuItem.title}" #if(!$subMenuItem.items) onclick="Horn.Frame.openMenu('$!{subMenuItem.id}','$!{subMenuItem.url}','$!{subMenuItem.title}','$!{menuIcon}')" #end>
+								<i class="h-i-$!{subMenuItem.icon}"></i> 
+								<span>$!{subMenuItem.title}</span>
+								#if($subMenuItem.items)
+								<span class="h-flag"></span>
+								#end
+							</a>
+							#if($subMenuItem.items)
+							<ul>
+							#foreach($subSubMenuItem in $subMenuItem.items)
+								#set($subMenuIcon=$menuIcon)
+								#if($subSubMenuItem.icon)
+									#set($subMenuIcon=$subSubMenuItem.icon)
+								#end
+								<li>
+									##二级菜单#
+									<a href="javascript:void(0)" title="$!{subSubMenuItem.title}" #if(!$subSubMenuItem.items) onclick="Horn.Frame.openMenu('$!{subSubMenuItem.id}','$!{subSubMenuItem.url}','$!{subSubMenuItem.title}','$!{subMenuIcon}')" #end>
+										$!{subSubMenuItem.title}
+										#if($subSubMenuItem.items)
+										<span class="h-flag"></span>
+										#end
+									</a>
+									#if($subSubMenuItem.items)
+                                    <ul>
+										#foreach($subSubSubMenuItem in $subSubMenuItem.items)
+											#set($subSubMenuIcon=$subMenuIcon)
+            								#if($subSubSubMenuItem.icon)
+            									#set($subSubMenuIcon=$subSubSubMenuItem.icon)
+            								#end
+                                        <li>
+											##三级菜单#
+											<a href="javascript:void(0)" title="$!{subSubSubMenuItem.title}" #if(!$subSubSubMenuItem.items) onclick="Horn.Frame.openMenu('$!{subSubSubMenuItem.id}','$!{subSubSubMenuItem.url}','$!{subSubSubMenuItem.title}','$!{subSubMenuIcon}')" #end>
+												$!{subSubSubMenuItem.title}
+												#if($subSubSubMenuItem.items)
+												<span class="h-flag"></span>
+												#end
+											</a>
+											#if($subSubSubMenuItem.items)
+                                            <ul>
+        										#foreach($subSubSubSubMenuItem in $subSubSubMenuItem.items)
+													#set($subSubSubMenuIcon=$subSubMenuIcon)
+                    								#if($subSubSubSubMenuItem.icon)
+                    									#set($subSubSubMenuIcon=$subSubSubSubMenuItem.icon)
+                    								#end
+                                                <li>
+        											##四级菜单#
+        											<a href="javascript:void(0)" title="$!{subSubSubSubMenuItem.title}" onclick="Horn.Frame.openMenu('$!{subSubSubSubMenuItem.id}','$!{subSubSubSubMenuItem.url}','$!{subSubSubSubMenuItem.title}','$!{subSubSubMenuIcon}')">
+        												$!{subSubSubSubMenuItem.title}
+        											</a>
+        										</li>
+        										#end
+                                            </ul>
+        									#end
+										</li>
+										#end
+                                    </ul>
+									#end
+								</li>
+							#end
+							</ul>
+							#end
+						</li>
+					#end
+                    
+                </ul>
+            </div>
+			#foreach($subMenuItem in $menuItem.items)
+						#set($menuIcon=$subMenuItem.icon)
+							#if($subMenuItem.items)
+							<ul class="h-menu-float" parentMenu="$!{subMenuItem.id}">
+							#foreach($subSubMenuItem in $subMenuItem.items)
+								#set($subMenuIcon=$menuIcon)
+								#if($subSubMenuItem.icon)
+									#set($subMenuIcon=$subSubMenuItem.icon)
+								#end
+								<li menuId="$!{subSubMenuItem.id}" >
+									##二级菜单#
+									<a href="javascript:void(0)" title="$!{subSubMenuItem.title}" #if(!$subSubMenuItem.items) onclick="Horn.Frame.openMenu('$!{subSubMenuItem.id}','$!{subSubMenuItem.url}','$!{subSubMenuItem.title}','$!{subMenuIcon}')" #end>
+										$!{subSubMenuItem.title}
+										#if($subSubMenuItem.items)
+										<span class="h-c-flag"></span>
+										#end
+									</a>
+									#if($subSubMenuItem.items)
+                                    <ul class="h-menu-float" parentMenu="$!{subSubMenuItem.id}">
+										#foreach($subSubSubMenuItem in $subSubMenuItem.items)
+											#set($subSubMenuIcon=$subMenuIcon)
+            								#if($subSubSubMenuItem.icon)
+            									#set($subSubMenuIcon=$subSubSubMenuItem.icon)
+            								#end
+                                        <li menuId="$!{subSubSubMenuItem.id}">
+											##三级菜单#
+											<a href="javascript:void(0)" title="$!{subSubSubMenuItem.title}" #if(!$subSubSubMenuItem.items) onclick="Horn.Frame.openMenu('$!{subSubSubMenuItem.id}','$!{subSubSubMenuItem.url}','$!{subSubSubMenuItem.title}','$!{subSubMenuIcon}')" #end>
+												$!{subSubSubMenuItem.title}
+												#if($subSubSubMenuItem.items)
+												<span class="h-c-flag"></span>
+												#end
+											</a>
+											#if($subSubSubMenuItem.items)
+                                            <ul class="h-menu-float" parentMenu="$!{subSubSubMenuItem.id}">
+        										#foreach($subSubSubSubMenuItem in $subSubSubMenuItem.items)
+													#set($subSubSubMenuIcon=$subSubMenuIcon)
+                    								#if($subSubSubSubMenuItem.icon)
+                    									#set($subSubSubMenuIcon=$subSubSubSubMenuItem.icon)
+                    								#end
+                                                <li menuId="$!{subSubSubSubMenuItem.id}">
+        											##四级菜单#
+        											<a href="javascript:void(0)" title="$!{subSubSubSubMenuItem.title}" onclick="Horn.Frame.openMenu('$!{subSubSubSubMenuItem.id}','$!{subSubSubSubMenuItem.url}','$!{subSubSubSubMenuItem.title}','$!{subSubSubMenuIcon}')">
+        												$!{subSubSubSubMenuItem.title}
+        											</a>
+        										</li>
+        										#end
+                                            </ul>
+        									#end
+										</li>
+										#end
+                                    </ul>
+									#end
+								</li>
+							#end
+							</ul>
+							#end
+						
+			#end
+		</div>
+	#end
+    
+</div>
+#end

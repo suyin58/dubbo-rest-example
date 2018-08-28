@@ -1,0 +1,196 @@
+.mod_list_bank a{
+	cursor:pointer;
+	color:#325E7F
+}
+.mod_list_bank a:link,.mod_list_bank a:visited{
+	cursor:pointer;
+	text-decoration:none
+}
+.mod_list_bank a:hover,.mod_list_bank a:active{
+	cursor:pointer;
+	text-decoration:none
+}
+.cityListDiv{
+	position:absolute;
+	border:1px solid #9E9E9E;
+	border-radius:5px;
+	font-family:Microsoft YaHei,Verdana,arial0;
+	width:450px;
+}
+
+.mod_list_bank{
+	margin:0;
+	padding:0;
+	font-family:Microsoft YaHei,Verdana,arial0;
+	font-size:14px;
+	position:absolute;
+	width:500px;
+	background-color:#FFFFFF;
+	border:2px solid #eee;
+    border-radius:4px;
+	background-color:#FFFFFF;
+	border:1px solid #9E9E9E;
+	display:none;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+	z-index:9999
+}
+.mod_list_bank .bank_top{
+	border-bottom:0px solid #CCCCCC;
+	padding-top:0px;
+	padding-left:0px;
+	padding-right:0px;
+	padding-bottom:0px;
+	height:275px;
+	line-height:25px
+}
+.mod_list_bank .bank_top strong{
+	display:inline;
+	float:left;
+	text-align:left
+}
+.bankHot strong{
+	display:inline;
+	width:80px;
+}
+.mod_list_bank a{
+	color:#325E7F;
+	cursor:pointer;
+	cursor:pointer;
+}
+
+.jiange{
+	margin-right:20px;
+}
+.mod_list_bank .bankHot{
+	height:25px;
+	border-bottom:1px solid #CCCCCC;
+	padding-top:0px;
+	padding-left:0px;
+	padding-right:15px;
+	padding-bottom:5px;
+	line-height:25px;
+	float:right;
+	margin-left:20px;
+}
+.mod_list_bank .list_wrap h4{
+	font-size:12px;
+	height:25px;
+	line-height:25px;
+	margin-top:5px
+}
+.mod_list_bank .list_wrap{
+	height:175px;
+	overflow:auto;
+	width:550px
+}
+.mod_list_bank .list_wrap .bank_cont{
+	padding-right:15px;
+	width:480px
+}
+.mod_list_bank .list_wrap .mod_bank_list a{
+	padding:4px;
+	display:inline-block;
+	cursor:pointer;
+	font-size:12px
+	
+}
+.mod_list_bank .list_wrap .mod_bank_list .col1{
+	width:30px;
+	font-size:12px
+}
+.mod_list_bank .list_wrap .mod_bank_list .col2{
+	width:500px;
+	font-size:12px
+}
+.mod_list_bank .list_wrap .mod_bank_list th{
+	text-align:left
+}
+.mod_list_bank .list_wrap .mod_bank_list th span{
+	display:inline-block;
+	width:90px;
+	font-weight:900;
+	text-align:center
+}
+.bank_top th span{
+	display:inline-block;
+	width:80px;
+	font-weight:900;
+	text-align:left
+}
+.bankHot th span{
+	display:inline-block;
+	width:80px;
+	font-weight:900;
+	text-align:left
+}
+.bank_top a {
+    cursor: pointer;
+    display: inline-block;
+    font-size: 12px;
+}
+.bankHot a {
+    cursor: pointer;
+    display: inline-block;
+    font-size: 12px;
+}
+.icon-remove-bank{
+	margin-bottom:220px;
+	margin-left:10px;
+	margin-right:10px;
+	cursor: pointer;
+}
+
+.icon-double-angle-down{
+	margin-left:10px;
+}
+.icon-double-angle-up{
+	margin-left:10px;
+}
+
+
+.tagDiv{
+	cursor:pointer;
+	width:90px;
+	font-weight:900;
+	letter-spacing:7px; 
+	font-size:15px;
+	padding-top:7px;
+	padding-left:5px;
+	margin-left:80px;
+	height:30px;
+	color:#9E9E9E;
+}
+
+
+.tagDivSelected{
+	cursor:pointer;
+	width:90px;
+	font-weight:900;
+	letter-spacing:7px; 
+	font-size:15px;
+	padding-top:7px;
+	padding-left:5px;
+	margin-left:80px;
+	height:30px;
+	border-bottom:2px solid  #428bca;
+}
+
+.tableTag{
+	width:465px;
+	border-bottom:1px solid #9E9E9E;
+	background-color:#f9fbfe;
+}
+.tableTagPGSelected{
+	
+}
+.opreationLeft{
+	border-left:1px solid #9E9E9E;
+}
+.moreBankDetail{
+	margin-top:15px;
+}
+.moreBankDetail a{
+	width:120px;
+	font-size:18px;
+	height:50px;
+}

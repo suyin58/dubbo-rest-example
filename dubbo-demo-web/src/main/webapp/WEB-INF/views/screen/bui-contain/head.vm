@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>表格自适应</title>
+
+<link href="$!{contextPath}/static/css/bui/bs3/dpl-min.css" rel="stylesheet">
+<link href="$!{contextPath}/static/css/bui/bs3/bui-min.css" rel="stylesheet">
+<link href="$!{contextPath}/static/css/bui/page-min.css" rel="stylesheet">
+<link href="$!{contextPath}/static/css/user/userstyle.css" rel="stylesheet">
+
+<script src="$!{contextPath}/static/js/jquery-1.8.1.min.js"></script>
+<script src="$!{contextPath}/static/js/bui.js"></script>
+<script src="$!{contextPath}/static/js/config.js"></script>
+<script src="$!{contextPath}/static/js/user.js"></script>
+<script src="$!{contextPath}/static/js/ajaxfileupload.js"></script>
+<style>
+      .tips-success{
+         line-height: 30px;
+	     padding: 0 10px;
+      }
+	 #detailContent{
+            margin-top :30px ;
+            margin-left:80px;
+            position : relative;
+      }
+      
+      .return{
+      	   background: url("$!{contextPath}/static/images/bui/ui-img-view-width.png") no-repeat -200px 0;
+		    height: 70px;
+		    left: 20px;;
+		    position: fixed;
+		    top: 50%;
+		    width: 30px;
+		    cursor:pointer;
+      }
+      .return:hover{
+      	   background: url("$!{contextPath}/static/images/bui/ui-img-view-width.png") no-repeat  -200px 0;
+		    height: 70px;
+		    left: 20px;;
+		    position: fixed;
+		    top: 50%;
+		    width: 30px;
+		    cursor:pointer;
+      }
+      .panel{
+		  min-height:200px;
+		  margin-right: 20px;
+	  }
+		.panel-header {
+	    	padding: 5px 15px;
+		}	
+		.panel .row.detail-row {
+	    	padding-left: 20px;
+	    	*padding-left: 10px;
+	    	padding-left: 10px\0;
+		}
+	.bui-grid-bbar > span {
+	    background-color: #ddd;
+	    border-radius: 5px;
+	    cursor: default;
+	    float: left;
+	    margin-left: 12px;
+	     margin-top: 7px;
+	    padding: 0 8px;
+	}
+	 .custom{
+		background-color: #f3f3f3;
+		border:1px solid #ddd;
+		padding:5px;
+		word-wrap: break-word;
+	}
+</style>
+
+</head>
+<body>
+ 
+<div class="content">

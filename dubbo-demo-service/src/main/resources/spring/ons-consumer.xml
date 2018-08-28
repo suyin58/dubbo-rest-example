@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="productInvestOnsListener" class="com.wjs.member.service.mq.ProductInvestOnsListener"></bean> <!--Listener配置-->
+    <bean id="mobileRegisteListener" class="com.wjs.member.service.mq.MobileRegisteListener"></bean>
+    <bean id="transferInvestSuccessListener" class="com.wjs.member.service.mq.TransferInvestSuccessListener"></bean>
+    <bean id="notbindMessageListener" class="com.wjs.member.service.mq.NotbindMessageListener"></bean>
+    <bean id="firstRechargeListener" class="com.wjs.member.service.mq.FirstRechargeListener"></bean>
+    <bean id="productRedeemOnsListener" class="com.wjs.member.service.mq.ProductRedeemOnsListener"></bean>
+    <bean id="consumer" class="com.wjs.mq.consumer.Consumer" init-method="start" destroy-method="shutdown">
+        <property name="group" value="${ons.group}"></property>
+        <property name="properties" > <!--消费者配置信息-->
+            <props>
+                <prop key="ConsumerId">${ons.consumer.id}</prop>
+                <prop key="AccessKey">${ons.accesskey}</prop>
+                <prop key="SecretKey">${ons.secretKey}</prop>
+                <prop key="NAMESRV_ADDR">${ons.nsaddr}</prop>
+                <prop key="ONSAddr">${ons.onsaddr}</prop>
+                <!--将消费者线程数固定为50个
+                <prop key="ConsumeThreadNums">50</prop>
+                -->
+            </props>
+        </property>
+        <property name="subscriptionTable">
+            <map>
+                <entry value-ref="productInvestOnsListener">
+                    <key>
+                        <bean class="com.aliyun.openservices.ons.api.bean.Subscription">
+                            <property name="topic" value="invest"/>
+                            <property name="expression" value="establish||paysuccess"/><!--expression即Tag，可以设置成具体的Tag，如 taga||tagb||tagc，也可设置成*。 *仅代表订阅所有Tag，不支持通配-->
+                        </bean>
+                    </key>
+                </entry>
+                <entry value-ref="mobileRegisteListener">
+                    <key>
+                        <bean class="com.aliyun.openservices.ons.api.bean.Subscription">
+                            <property name="topic" value="registe"/>
+                            <property name="expression" value="mobile"/><!--expression即Tag，可以设置成具体的Tag，如 taga||tagb||tagc，也可设置成*。 *仅代表订阅所有Tag，不支持通配-->
+                        </bean>
+                    </key>
+                </entry>
+                 <entry value-ref="transferInvestSuccessListener">
+                    <key>
+                        <bean class="com.aliyun.openservices.ons.api.bean.Subscription">
+                            <property name="topic" value="transferInvest"/>
+                            <property name="expression" value="send_deduct||transferForCustAsset"/><!--expression即Tag，可以设置成具体的Tag，如 taga||tagb||tagc，也可设置成*。 *仅代表订阅所有Tag，不支持通配-->
+                        </bean>
+                    </key>
+                </entry>
+                <entry value-ref="notbindMessageListener">
+                    <key>
+                        <bean class="com.aliyun.openservices.ons.api.bean.Subscription">
+                            <property name="topic" value="cmccNotbindMessage"/>
+                            <property name="expression" value="cmccNotbindMessage"/><!--expression即Tag，可以设置成具体的Tag，如 taga||tagb||tagc，也可设置成*。 *仅代表订阅所有Tag，不支持通配-->
+                        </bean>
+                    </key>
+                </entry>
+                <entry value-ref="firstRechargeListener">
+                	<key>
+                		<bean class="com.aliyun.openservices.ons.api.bean.Subscription">
+                			<property name="topic" value="recharge"/>
+                			<property name="expression" value="rechargeOutLineActivity"/>
+                		</bean>
+                	</key>
+                </entry>
+                <entry value-ref="productRedeemOnsListener">
+                    <key>
+                        <bean class="com.aliyun.openservices.ons.api.bean.Subscription">
+                            <property name="topic" value="product"/>
+                            <property name="expression" value="redeem||collectFail||redeemForCustAsset"/>
+                        </bean>
+                    </key>
+                </entry>
+                <!--更多的订阅添加entry节点即可-->
+            </map>
+        </property>
+    </bean>
+</beans>

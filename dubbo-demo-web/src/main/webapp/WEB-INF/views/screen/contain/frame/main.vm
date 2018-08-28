@@ -1,0 +1,4 @@
+<div class="h-main" region="center">
+	#parse("/screen/contain/frame/menu.vm")
+	#parse("/screen/contain/frame/tabscreen.vm")
+</div>

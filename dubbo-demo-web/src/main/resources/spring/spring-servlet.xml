@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+						http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+						http://www.springframework.org/schema/mvc
+						http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+						http://www.springframework.org/schema/context 
+						http://www.springframework.org/schema/context/spring-context-3.0.xsd
+						http://www.springframework.org/schema/util 
+						http://www.springframework.org/schema/util/spring-util.xsd">
+
+
+	<!-- 自动扫描组件，可以写多个。 -->
+	<context:component-scan base-package="com.wjs.member.**.controller.**" />
+	<!-- 定义直接找到视图文件的路径 -->
+	<bean name="/**/*.htm" class="org.springframework.web.servlet.mvc.UrlFilenameViewController"> 
+	</bean> 
+	
+	<!-- <mvc:annotation-driven /> 是一种简写形式，完全可以手动配置替代这种简写形式，会自动注册 DefaultAnnotationHandlerMapping与AnnotationMethodHandlerAdapter 
+		两个bean, 是spring MVC为@Controllers分发请求所必须的。 -->
+	<mvc:annotation-driven />
+	<!-- 配置js,css等静态文件直接映射到对应的文件夹，不被DispatcherServlet处理 若将以下改为：<mvc:default-servlet-handler 
+		/>则使用默认的Servlet来响应静态文件 -->
+	<mvc:resources mapping="/static/**" location="/static/" />
+
+	<!-- 拦截器
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<mvc:exclude-mapping path="/static/**" />
+			<bean class="com.wjs.member.common.interceptors.SecurityInterceptor">
+				<property name="excludedUrls">
+					<list>
+						<value>/logon/*</value>
+						<value>/login.htm</value>
+					</list>
+				</property>
+			</bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
+ 	-->
+ 	
+ 	
+	<!-- Resolves view names to protected .jsp resources within the /WEB-INF/views 
+		directory -->
+	<!-- <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"> 
+		<property name="prefix" value="/WEB-INF/views/" /> <property name="suffix" 
+		value=".jsp" /> </bean> -->
+		
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
+
+	<bean id="stringHttpMessageConverter"
+		class="org.springframework.http.converter.StringHttpMessageConverter">
+		<property name="supportedMediaTypes">
+			<list>
+				<value>text/html;charset=UTF-8</value>
+			</list>
+		</property>
+	</bean>
+
+
+	<bean id="exceptionResolver" class="com.wjs.member.common.web.MappingExceptionResolver">
+		<property name="defaultErrorView" value="error/jsp/500" />
+		<property name="exceptionMappings">
+			<props>
+				<prop key="org.springframework.validation.BindException">error/jsp/400</prop>
+				<prop
+					key="org.springframework.web.bind.MissingServletRequestParameterException">error/jsp/400</prop>
+				<prop key="org.springframework.security.access.AccessDeniedException">error/jsp/403</prop>
+				<prop key="java.lang.Exception">error/jsp/500</prop>
+			</props>
+		</property>
+	</bean>
+</beans>	

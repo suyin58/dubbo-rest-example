@@ -1,0 +1,95 @@
+div#errorInfo {
+	width: 70%;
+	margin: auto;
+	margin-top: 140px;
+	width: 900px;
+}
+
+img {
+	float: left;
+}
+
+.auxiliary-text {
+	margin-top: 10px;
+	font-size: 14px;
+	color: rgb(153, 153, 153);
+}
+
+input#seconds {
+	width: 22px;
+	border: 0px;
+	padding-left: 1px;
+	font-size: 18px;
+	color: rgb(223, 41, 41);
+}
+
+.tipBox {
+	border: 1px solid rgb(165, 197, 195);
+	padding-bottom: 50px;
+	box-shadow: 1px 1px 1px #CAECED;
+	border-radius: 5px;
+	margin-left: 50px;
+}
+
+.tip {
+	font-size: 25px;
+	margin-top: 18px;
+	margin-left: 200px;
+	height: 35px;
+	color: rgb(32, 73, 74);
+}
+
+.legend {
+	width: 73%;
+	border: 1px dotted rgb(188, 223, 217); margin-top : 10px;
+	margin-bottom: 0px;
+	margin-left: 200px;
+	padding: 0px;
+	margin-top: 10px;
+}
+
+div#info {
+	margin-left: 200px;
+	margin-top: 20px;
+	font-size: 18px;
+	color: rgb(44, 35, 35);
+	line-height: 40px;
+	padding-right: 10px;
+}
+
+#seconds {
+	font-size: 30px;
+	color: red;
+}
+
+.button {
+	background-color: rgb(0, 139, 255);
+	color: white;
+	width: 180px;
+	font-size: 18px;
+	margin-top: 20px;
+	cursor: pointer;
+}
+
+ul {
+	margin-top: 10px;
+}
+
+li {
+	font-size: 16px;
+	line-height: 35px;
+	color: rgb(76, 73, 73);
+}
+
+body {
+	background-attachment: scroll;
+	background-repeat: repeat-x;
+	background-position-x: 0px;
+	background-position-y: 0px;
+	background-size: auto;
+	background-origin: padding-box;
+	background-clip: border-box;
+	background-color: rgba(0, 0, 0, 0);
+	margin: 0 auto;
+	font-size: 12px;
+}

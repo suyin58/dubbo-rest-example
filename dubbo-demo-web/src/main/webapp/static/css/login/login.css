@@ -1,0 +1,74 @@
+body {
+    background-image : url('../../images/login/bg_body.gif');
+    background-attachment : scroll;
+    background-repeat : repeat-x;
+    background-position-x : 0px;
+    background-position-y : 0px;
+    background-size : auto;
+    background-origin : padding-box;
+    background-clip : border-box ;
+    background-color : rgba(0, 0, 0, 0);
+    margin : 0 auto;
+    font-size: 12px;
+}
+
+button {
+	background: #57a9eb; /* Old browsers */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#57a9eb', endColorstr='#3a76c4',GradientType=0 ); /* IE6-9 */
+	border:1px solid #326fa9;
+	border-top-color:#3e80b1;
+	border-bottom-color:#1e549d;
+	color:#fff;
+	text-shadow:0 1px 0 #1e3c5e;
+	font-size:12px;
+	padding:7px 15px;
+	width:100px;
+	border-radius:20px;
+	box-shadow:0 1px 0 #bbb, 0 1px 0 #9cccf3 inset;
+}
+
+
+input {
+	margin-top:5px;
+	padding:6px 10px;
+	border:1px solid #33d9da;
+	border-radius:5px;
+	box-shadow: 0 0 5px #e8e9eb inset;
+	width:340px;
+	height:22px;
+
+	outline:0; 
+	font-family: "Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans serif;
+	font-size:16px;
+	color:#444;
+}
+
+.login_img{
+	margin-left: auto;
+    margin-right: auto;
+    margin-top:80px;
+	width:1000px;
+	height:510px;
+	-webkit-border-radius: 2px;
+ 	 -moz-border-radius: 2px;
+ 	 border-radius: 2px;
+ 	 -webkit-box-shadow:5px 5px 5px 5px rgba(0,0,0,.5);
+     -moz-box-shadow:5px 5px 5px 5px rgba(0,0,0,.5);
+	box-shadow:5px 5px 5px 5px rgba(0,0,0,.5);
+	background-image : url('../../images/login/logo.jpg');
+}
+
+.login_form{
+	width:400px;
+	height:150px;
+	margin-left:650px;
+	margin-top:90px;
+	font-size:12px;
+	font-weight:800;
+}
+.title{
+	margin-left:70px;
+	padding-top:40px;
+	font-size:40px;
+	font-weight:800;
+}

@@ -1,0 +1,5 @@
+   </div>
+   <!--按钮权限-->
+   <input type="hidden" value=$!{buttonNo}  id="functionNo"/>
+</body>
+</html>

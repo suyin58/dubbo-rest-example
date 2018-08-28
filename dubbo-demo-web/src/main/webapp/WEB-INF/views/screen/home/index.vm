@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+ <head> 
+  <meta charset="utf-8" /> 
+  <title>详情页</title> 
+  <!-- 此文件为了显示Demo样式，项目中不需要引入 --> 
+  <link href="../css/bui/bs3/dpl-min.css" rel="stylesheet" /> 
+  <link href="../css/bui/bs3/bui-min.css" rel="stylesheet" /> 
+  <script src="../js/jquery-1.8.1.min.js"></script>
+  <style>
+  
+	.helptit {
+	    color: #115c9d;
+	    font-size: 22px;
+	    font-weight: bold;
+	    margin-bottom: 10px;
+	    margin-left: 6px;
+	    margin-top: 31px;
+	}
+	.question{
+		margin-top:2px;
+		border-bottom: 1px dotted #aaa;
+		margin-left: 20px;
+	}
+	.question .questtit {
+	    cursor: pointer;
+	    height: 30px;
+	    width: 85%;
+	}
+
+  	.content{
+  		padding-top:10px;
+  		padding-left:50px;
+  	}
+  	.desc-info{
+  		padding-left : 20px;
+  	}
+  	.detail-row{
+		margin-left : 20px;
+		margin-bottom:10px;  	
+  	}
+  	.connect{
+  		color:blue;
+  		cursor:pointer;
+  	}
+  	.resolve{
+  		margin-left:20px;
+  	}
+  	h3{
+  		margin-left: 20px;
+   		margin-top: 10px;
+  	}
+  	h3 .click-button{
+  		font-size : 12px;
+  		color:blue;
+  	}
+  	label{
+  		color:rgb(156,48,163);
+  	}
+  	.step{
+  		background-image: url("../images/home/step_ico_bg.png");
+	    background-position: 0 0;
+	    background-repeat: no-repeat;
+	    display: inline-block;
+	    height: 32px;
+	     margin-right: 10px;
+	    text-align: center;
+	    width: 32px;
+	    color:#fff;
+	    font-size:16px;
+	    font-weight:blod;
+	    line-height:32px;
+  	}
+  </style>
+ </head> 
+ 	
+ <body> 
+  <div class="content"> 
+    <div class="desc-info"> 
+    	<div class="helptit">常见问题解答</div>
+    	<hr>
+		    <div class="question">
+		      <div class="questtit"><h3>如何发布融资申请?
+		      	<span class="click-button view-button pull-right hide">查看<i class="icon-double-angle-down"></i></span>
+		      	<span class="click-button retract-button pull-right ">收起<i class="icon-double-angle-up"></i></span>
+		      	</h3></div> 
+		      <div class="resolve">
+			      <div class="row detail-row"> 
+				       <div class="span"> 
+				        <label>功能介绍：</label>
+				        <span class="detail-text"> 平台提供融资申请发布服务，在商务合作洽谈完成后，可直接在本平台发布融资信息。</span> 
+				       </div> 
+			       </div>
+			       <div class="row detail-row"> 
+				       <div class="span"> 
+				        <label>&emsp;&emsp;&emsp;&emsp;&emsp;</label>
+				        <span class="detail-text">申请提交后本平台将及时进行处理，在产品上架日将融资产品上架到招财宝等销售平台。</span> 
+				       </div>
+			       </div>
+			       <div class="row detail-row">  
+				       <div class="span"> 
+				        <label>菜单路径：</label>
+				        <span class="detail-text"><span class="step">1</span>点击 【业务管理--><span class="connect finaning_req_pub" id="finaning_req_pub">融资产品发布管理</span>】，该页面展示所有融资申请记录。</span> 
+				       </div> 
+			      </div> 
+			       <div class="row detail-row"> 
+				       <div class="span"> 
+				        <label>&emsp;&emsp;&emsp;&emsp;&emsp;</label>
+				        <span class="detail-text"><span class="step">2</span>点击按钮【新增融资申请】，维护融资申请信息。</span> 
+				       </div>
+			       </div>
+			       
+			        <div class="row detail-row"> 
+				       <div class="span"> 
+				        <label>&emsp;&emsp;&emsp;&emsp;&emsp;</label>
+				        <span class="detail-text"><span class="step">3</span>融资申请录入完成后，返回 【业务管理--><span class="connect finaning_req_pub" id="finaning_req_pub">融资产品发布管理</span>】页面，确认信息无误后在操作列点击【提交】完成申请。</span> 
+				       </div>
+			       </div>
+			       
+			        <div class="row detail-row"> 
+				       <div class="span"> 
+				        <label>重点说明：</label>
+				        <span class="detail-text"><span class="step">1</span>融资者姓名、证件类型、证件号码三者必须正确匹配。</span> 
+				       </div>
+			       </div>
+			       
+			        <div class="row detail-row"> 
+				       <div class="span"> 
+				        <label>&emsp;&emsp;&emsp;&emsp;&emsp;</label>
+				        <span class="detail-text"><span class="step">2</span>融资者收款银行卡信息务必要正确， 如错误将会导致打款失败。</span> 
+				       </div>
+			       </div>
+			       
+			        <div class="row detail-row"> 
+				       <div class="span"> 
+				        <label>&emsp;&emsp;&emsp;&emsp;&emsp;</label>
+				        <span class="detail-text"><span class="step">3</span>融资金额，周期，融资利率等信息务必正确。</span> 
+				       </div>
+			       </div>
+			       
+			        <div class="row detail-row"> 
+				       <div class="span"> 
+				        <label>&emsp;&emsp;&emsp;&emsp;&emsp;</label>
+				        <span class="detail-text"><span class="step">4</span>股东名册在募集成功后可在 【业务管理--><span class="connect finaning_req_pub" id="finaning_req_pub">融资产品发布管理</span>】，在操作列点击【导出股东名册】导出该笔融资申请对应股东信息。</span> 
+				       </div>
+			       </div>
+			       
+			     </div>
+			  </div>
+		     <div class="question">
+		       
+		       <div class="questtit"><h3>如何查询融资产品?
+					<span class="click-button view-button pull-right">查看<i class="icon-double-angle-down"></i></span>
+		      	<span class="click-button retract-button pull-right hide">收起<i class="icon-double-angle-up"></i></span>
+			</h3> </div> 
+		       <div class="resolve hide" >
+			      <div class="row detail-row"> 
+				       <div class="span"> 
+				        <label>功能介绍：</label>
+				        <span class="detail-text">为满足销售平台招财宝200人限制要求，合作机构需要将一笔融资申请拆分成多个融资产品</span> 
+				       </div> 
+			       </div>
+			       <div class="row detail-row"> 
+				       <div class="span"> 
+				        <label>&emsp;&emsp;&emsp;&emsp;&emsp;</label>
+				        <span class="detail-text">本页面可查询融资申请拆分后的融资产品。</span> 
+				       </div>
+			       </div>
+			       <div class="row detail-row">  
+				       <div class="span"> 
+				        <label>菜单路径：</label>
+				        <span class="detail-text">【业务管理--><span class="connect" id="finaning_prd_info">融资产品信息查询</span>】</span> 
+				       </div> 
+			      </div> 
+		        </div> 
+		   	</div> 
+		  <div class="question">
+		       <div class="questtit">
+		       		<h3>帮助与建议
+						<span class="click-button view-button pull-right">查看<i class="icon-double-angle-down"></i></span>
+		      			<span class="click-button retract-button pull-right hide">收起<i class="icon-double-angle-up"></i></span>
+					</h3> 
+				</div> 
+		       <div class="resolve hide" >
+			      <div class="row detail-row"> 
+				       <div class="span"> 
+				        <label></label>
+				        <span class="detail-text">欢迎拨打 客服电话 0571-28829270 联系人 周汉夫，  或者发送邮件 至 zhouhf@hundsun.com 。</span> 
+				       </div> 
+			       </div>
+		        </div> 
+		   	</div> 
+		   	
+	 </div> 
+	 <script>
+	 	$('.questtit').on('click',function(){
+	 		$(this).next('.resolve').toggleClass('hide');
+	 		$(this).find('.click-button').toggleClass('hide');
+	 		$(this).parent().siblings('.question').find('.resolve').addClass('hide');
+	 		$(this).parent().siblings('.question').find('.view-button').removeClass('hide');
+	 		$(this).parent().siblings('.question').find('.retract-button').addClass('hide');
+	 	});
+	 	$('#finaning_prd_info').on('click',function(){
+	 		window.top.Horn.Frame.openMenu('200500','../channel/channelReqUnionFilterOrg/channelReqUnion.htm','融资产品信息查询','');
+	 	});
+	 	
+	 	$('.finaning_req_pub').on('click',function(){
+	 		window.top.Horn.Frame.openMenu('200100','../channel/channelReqMain/channelReqMain.htm','融资产品发布管理','');
+	 	});
+	 </script>
+  </div>   
+ </body>
+</html>

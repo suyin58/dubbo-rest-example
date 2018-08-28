@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:cache="http://www.springframework.org/schema/cache"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	   xmlns:p="http://www.springframework.org/schema/p" xmlns:aop="http://www.springframework.org/schema/aop"
+	   xmlns:task="http://www.springframework.org/schema/task"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-3.0.xsd
+    http://www.springframework.org/schema/tx
+    http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+    http://www.springframework.org/schema/jdbc
+ 	http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd
+ 	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+ 	http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd"
+	   default-lazy-init="true">
+
+	<context:component-scan base-package="com.wjs.member.**.service.**" />
+	<context:component-scan base-package="com.wjs.member.**.logic.**" />
+	<!-- <context:component-scan base-package="com.wjs.member.**.component.**"
+		/> -->
+	<!-- 注册 AutowiredAnnotationBeanPostProcessor、CommonAnnotationBeanPostProcessor、
+		PersistenceAnnotationBeanPostProcessor、RequiredAnnotationBeanPostProcessor
+		四个bean容器 -->
+	<context:annotation-config />
+	<task:executor id="myExecutor" pool-size="6" />
+	<task:annotation-driven executor="myExecutor" />
+	<!-- 切面  -->
+	<aop:aspectj-autoproxy expose-proxy="true"/>
+
+	<bean id="servicePointCutHandler" class="com.wjs.member.plugin.ServiceExecutionInterceptor" />
+	
+	
+	<bean id="excelXmlImport" class="com.wjs.common.util.excel.xmlImport.ExcelXmlImport" />
+	<bean id="springContext" class="com.wjs.common.context.SpringContext" lazy-init="false"/>
+	
+	
+	<aop:config>
+		<aop:aspect ref="servicePointCutHandler">
+			<aop:pointcut id="exceptionService" expression="execution(* com.wjs.member.service..*(..))" />
+			<aop:after-throwing pointcut-ref="exceptionService" method="afterThrowing" throwing="e" />
+		</aop:aspect>
+	</aop:config>
+
+
+	<cache:annotation-driven cache-manager="cacheManager" />
+	<bean id="cacheManagerFactory" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean" p:configLocation="classpath:ehcache.xml" p:shared="false" />
+	<bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager" p:cacheManager-ref="cacheManagerFactory" />
+
+
+	<!-- 引入memcachee配置 ：common包中 -->
+	<import resource="classpath*:spring/spring-memcache.xml" />
+
+	<!-- 导入其他配置文件 -->
+	<import resource="classpath*:spring/test-spring-daoContext.xml" />
+		<import resource="classpath*:spring/dubbo-service-beans.xml" />
+	<import resource="classpath*:spring/dubbo-client-beans.xml" />
+</beans>

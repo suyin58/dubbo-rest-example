@@ -1,0 +1,52 @@
+系统权限
+a)操作员&岗位关系
+	操作员(operators) --> 操作员&岗位映射(oper_post) --> 岗位(posts)
+b)岗位&菜单&功能关系
+	岗位(posts) --> 岗位权限(post_rights) --> 菜单&功能关系
+b)菜单&功能关系
+	菜单(system_menu) --> 菜单&功能(menu_func) --> 功能(system_func)
+
+
+
+1.插入菜单
+	-- 根菜单的Parent_id 为 0
+	delete from system_menu where menu_id  = '990' ; 
+	INSERT INTO `system_menu` (`menu_id`, `menu_num`, `menu_macro_def`, `menu_title`, `main_menu_flag`, `short_cut`, `tool_btn`, `menu_prompt`, `menu_name`, `url_address`, `menu_en_name`, `cmd_type`, `cmd_name`, `dll_name`, `parent_id`, `icon_index`, `leaf_flag`, `remark`, `belong_type`) VALUES (990, 99, 'SYSTEM_MANAGE', '系统管理', '1', '', '', '', '系统管理', '', '', '', '', '', 0, 'th-list', '0', '', '01');
+	-- 二级菜单的parent_id为上级菜单的ID
+	delete  from system_menu where parent_id = '990';
+	INSERT INTO `system_menu` (`menu_id`, `menu_num`, `menu_macro_def`, `menu_title`, `main_menu_flag`, `short_cut`, `tool_btn`, `menu_prompt`, `menu_name`, `url_address`, `menu_en_name`, `cmd_type`, `cmd_name`, `dll_name`, `parent_id`, `icon_index`, `leaf_flag`, `remark`, `belong_type`) VALUES (990100, 1, 'WORK_DAY_CONFIG', '工作日配置', '1', '', '', '', '工作日配置', '/publicInfo/openDayConfig/openDayConfig.htm', '', '', '', '', 990, '', '1', '', '01');
+	
+2.插入菜单对应的功能和功能关系
+	-- 插入功能号
+	delete from system_func where function_no in(202021,202022,202023,202024,202025);
+	INSERT INTO `system_func` (`function_no`, `function_macro_def`, `function_name`, `en_sys_status`, `remark`, `op_log_save_flag`) VALUES (202021, '', '查询工作日', '125', '', '1');
+	INSERT INTO `system_func` (`function_no`, `function_macro_def`, `function_name`, `en_sys_status`, `remark`, `op_log_save_flag`) VALUES (202022, '', '初始化本月工作日', '125', '', '1');
+	INSERT INTO `system_func` (`function_no`, `function_macro_def`, `function_name`, `en_sys_status`, `remark`, `op_log_save_flag`) VALUES (202023, '', '设置为工作日', '125', '', '1');
+	INSERT INTO `system_func` (`function_no`, `function_macro_def`, `function_name`, `en_sys_status`, `remark`, `op_log_save_flag`) VALUES (202024, '', '设置为非工作日', '125', '', '1');
+	INSERT INTO `system_func` (`function_no`, `function_macro_def`, `function_name`, `en_sys_status`, `remark`, `op_log_save_flag`) VALUES (202025, '', '查询当前系统工作日', '125', '', '1');
+		
+	-- 插入菜单和功能号对应关系
+		-- 根菜单的functionId为-1【一定要插入】
+	delete from menu_func where menu_id = '990';
+	INSERT INTO `menu_func` (`menu_id`, `function_no`) VALUES (990, -1);
+		
+	delete from menu_func where menu_id = '990100';
+	INSERT INTO `menu_func` (`menu_id`, `function_no`) VALUES (990100, 202021);
+	INSERT INTO `menu_func` (`menu_id`, `function_no`) VALUES (990100, 202022);
+	INSERT INTO `menu_func` (`menu_id`, `function_no`) VALUES (990100, 202023);
+	INSERT INTO `menu_func` (`menu_id`, `function_no`) VALUES (990100, 202024);
+	INSERT INTO `menu_func` (`menu_id`, `function_no`) VALUES (990100, 202025);
+
+3.界面配置岗位拥有的功能号ID
+	权限维护 》》 岗位维护 》》 编辑
+4.配置用户于功能号的关系（ps：如果没有功能号的映射，那么久看不到对应的{text}）
+			{text : '<i class="icon-plus"></i>新建',btnCls : 'button button-small',handler:addPost,id:"202021"},
+            {text : '<i class="icon-edit"></i>编辑',btnCls : 'button button-small',handler:updatePost,id:"202022"},
+            {text : '<i class="icon-remove"></i>注销',btnCls : 'button button-small',handler:logOffPost,id:"202023"},
+
+
+
+
+
+
+			

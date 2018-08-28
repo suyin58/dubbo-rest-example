@@ -1,0 +1,282 @@
+<style>
+	input[type="text"] {
+		width: 120px;
+		height: 16px;
+}
+</style>
+#set($frame={
+	"lock":false,
+	"logo":{"title":"系统工作日：$!{initDate}","img":"$!{contextPath}/static/css/frame/images/logo.png"}
+	,"toolbar":{"items":[
+		{"title":"$!{LOGINED.operName}","icon":"user","onclick":""}
+		,{"title":"修改密码","icon":"lock","onclick":"showPwdForm()"}
+		,{"title":"退出","icon":"logout","onclick":"logOut();"}
+	]}
+	,"screen":{
+		"limit":15,
+		"homePage":{"title":"欢迎使用","icon":"home","url":"$!{contextPath}/home/homePage.htm"}
+	}
+	,"navigation":{"items":$!{navigation}}
+	,"menu":{"items":[
+			{"id":"1","title":"<div id='s1'></div>","items":
+				${treeMenu}
+			}
+		]}
+})
+
+	<div id="content" class="hide">
+		<form id="pwdForm" class="form-horizontal">
+			<div class="row">
+				<div class="control-group span12">
+					<label class="control-label">用户名：</label>
+					<div class="controls">
+						<input type="text" value="$!{LOGINED.operCode}" style="width:150px;" readonly="readonly" name="operCode" class="input-normal control-text" data-rules="{required : true}">
+					
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="control-group span12">
+					<label class="control-label"><s>*</s>原密码：</label>
+					<div class="controls">
+						<input type="password" name="inputOldPwd"  style="width:150px;" class="input-normal control-text" data-rules="{required:true}">
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="control-group span12">
+					<label class="control-label"><s>*</s>新密码：</label>
+					<div class="controls">
+						<input id="inputNewPwd" type="password"  style="width:150px;" name="inputNewPwd" class="input-normal control-text" data-rules="{required : true}">
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="control-group span12">
+					<label class="control-label"><s>*</s>确认新密码：</label>
+					<div class="controls">
+						<input type="password" name="comfirmNewPwd" style="width:150px;" class="input-normal control-text" data-rules="{required : true,equalTo:'#inputNewPwd'}">
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+	
+	<input type="hidden" id = "belongType" value="$!{LOGINED.belongType}"  name="belongType">
+					
+#jscode()
+	##定义常量
+	var Select = BUI.Select,Overlay = BUI.Overlay,Form = BUI.Form;
+	
+	##弹出修改密码窗体
+	function showPwdForm(){
+		dialog.show();
+	}
+
+	##退出，重新返回登录页面
+	function logOut()
+	{
+		BUI.Message.Confirm('您确定要退出系统吗',function(){
+			window.location.href="$!{contextPath}/logOut.htm";
+		});
+	}
+	//关联到表单
+	var form = new Form.Form({
+		srcNode : '#pwdForm'
+		}).render();
+		
+	 var dialog = new Overlay.Dialog({
+			title:'修改密码',
+			width:420,
+			height:230,
+			//配置DOM容器的编号
+			contentId:'content',
+			success:function () {
+				//开启表单验证，验证如果通过则提交表单
+				 form.valid();
+				 if(form.isValid()){
+	        	       form.ajaxSubmit({ //表单异步提交
+	        	               url : '$!{contextPath}/system/operators/updatePwd.json',
+	        	               type: "POST",
+	        	               data:form.getRecord(),
+	        	               success : function(data){
+	        	                	if(data.success)
+									{
+										BUI.Message.Alert('密码修改成功,请重新登录！',function(){
+					    					location.href ="$!{contextPath}/login.htm";
+												this.close();
+										}, 'success');
+										$(".bui-ext-close").remove();
+									}
+									else {
+										  BUI.Message.Alert(data.errorInfo);
+									}      
+	        	               }, 
+	        	               error : function(){
+	        	                      alert("系统异常");
+	        	               }
+	        	       });
+	        	}	
+		   }
+	});
+		
+	##搜索框功能实现
+	var suggest = new Select.Suggest({
+	render:'#s1',
+	name:'menuTitle',
+	dataType : 'json',
+	url:"$!{contextPath}/getMenuListByTitle.json"
+	});
+	suggest.render();
+	
+	$('#s1').find('input[name="menuTitle"]').on('change',function(ev){
+		//回退
+		if($(this).val() == ""){
+			$('.h-menu-body').find('li').find('li').each(function(){
+				$(this).removeAttr('style');
+			})
+		}
+	})
+	suggest.on('change',function(){
+		
+		$('.h-menu-body').find('li').find('li').each(function(){
+			if($(this).find('a').attr('title') != suggest.getSelectedValue()){
+				//$(this).css({'display':'none'});
+			}else{
+				$(this).parent('li').addClass('active');
+				$(this).parent('ul').attr({'style':'display: block'});
+				$(this).find('a').trigger('click');
+				$('#s1').find('input[name="menuTitle"]').val("");
+			}
+			
+		})
+		$('.bui-suggest .bui-combox-input').trigger('blur');
+	});
+	##搜索框功能结束
+	$('.bui-list-item').on('keydown',function(ev){
+	
+		if(ev.domEvent.keyCode == 40 || ev.domEvent.keyCode == 38){
+				alert(ev.domEvent.keyCode);
+		}
+	})
+	##屏蔽右键功能	
+	$(document).on('contextmenu',function(){
+		return  false;
+	});
+	##自定义右键功能
+	var urlInfo,oMenu,titleInfo,mounseIn;
+	$('.h-main .h-menu .h-menu-con .h-menu-body').find('li').on('contextmenu',function(event){
+		if($(this).attr('parentmenu') ){
+			return;
+		}
+		oMenu = document.getElementById("quickMenu");
+		urlInfo = $(this).find('a').attr('onclick');
+		titleInfo = $(this).find('a').attr('title');
+		oMenu.style.display = "block";
+		oMenu.style.top = event.clientY + "px";
+		oMenu.style.left = event.clientX + "px";
+		oMenu.style.zIndex = 9999;
+		event.stopPropagation();
+		mounseIn = false;
+		$('#quickMenu').live('mouseenter',function(){
+			mounseIn = true;
+		}).live('mouseleave',function(){
+			setTimeout(closeMenu,1000);
+			mounseIn = false;
+		})
+		if(!mounseIn){
+			setTimeout(closeMenu,2000);
+		}
+		return false;
+	});
+	
+	##关闭menu
+	function closeMenu(){
+		if(mounseIn){
+			return;
+		}
+		if(oMenu){
+			oMenu.style.display = "none";	
+		}
+	}
+	##新增快捷菜单	
+	function addQuickMenu(){		
+	    
+		if($('.h-header .h-nav .h-nav-con ul li').length ==5 ){
+			BUI.Message.Alert("只能添加5个快捷方式,如需要添加,请删除已添加的快捷方式", "info");
+			return;
+		}
+		
+		if($('.h-header .h-nav .h-nav-con ul').html().indexOf(urlInfo) > 0){
+			BUI.Message.Alert("该快捷方式已经添加", "info");
+			return;
+		}	
+		 menuID = urlInfo.substring(urlInfo.indexOf("(")+2, urlInfo.indexOf("(")+8);
+	     var menuInfo = {"menuTitle" : titleInfo, "menuID" : menuID};
+		 var result=true;
+		 $.ajax({async:false,
+		             url:"$!{contextPath}/addShortCutMenu.json",
+					 type:"POST",
+					 data:menuInfo,
+					 success:function(data){
+		                              if(!data.success){
+			                            BUI.Message.Alert("添加快捷菜单失败","error");
+				                        result=false;
+			                          }
+		                            }
+					 });
+		 
+		if(result){
+		 $('.h-header .h-nav .h-nav-con').removeAttr('style');
+		 $('.h-header .h-nav .h-nav-con ul').removeAttr('style').append('<li><a onclick="'+urlInfo+'" title="'+titleInfo+'"><i class="h-i-exchange"></i><span>'+titleInfo+'</span></a><span class="h-tab-close"></span></li>');		
+		}
+		return false;
+	}
+	##点击x 删除快捷菜单
+	$('.h-tab-close').live('click',function(event){
+	    var urlInfo = $(this).prev().attr('onclick');
+	    var menuID = urlInfo.substring(urlInfo.indexOf("(")+2, urlInfo.indexOf("(")+8);
+		var menuInfo = {"menuID" : menuID};
+		var result=true;
+		$.ajax({async:false,
+		             url:"$!{contextPath}/deleteShortCutMenu.json",
+					 type:"POST",
+					 data:menuInfo,
+					 success:function(data){
+		                            if(!data.success){
+			                           BUI.Message.Alert("删除快捷菜单失败","error");
+				                       result=false;
+			                         }
+		              }
+		    });
+		
+		if(result){
+		   $(this).parent().remove();
+		}	
+		event.stopPropagation();
+		return false;
+	})
+	##添加鼠标进出事件，对关闭按钮进行显示与隐藏
+	$('.h-header .h-nav .h-nav-con ul li').live('mouseenter',function(){
+	    $(this).addClass('selected').find('.h-tab-close').show();
+	}).live('mouseleave',function(){
+		 $(this).removeClass('selected').find('.h-tab-close').hide();
+	})	
+	 
+	
+	var belongType = $("#belongType").val();
+	if(belongType=="01")
+	{
+		document.title='网金所业务运维平台';
+	}
+	if(belongType=="02")
+	{
+		$("#s1").empty();
+		$("#s1").hide();
+		$("div.h-menu-body > ul > li[menuid='200']").addClass("active");
+		$("div.h-menu-body > ul > li[menuid='200'] > ul").show();
+		document.title='网金所合作机构平台';
+	}
+	
+
+#end

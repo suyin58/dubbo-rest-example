@@ -1,0 +1,259 @@
+.warning-div {
+	float: left;
+	margin-left: 15px;
+	margin-right: 10px;
+	margin-top: 15px;
+	width: 25px;
+}
+
+.tip-div {
+	margin-top: 15px;
+	float: left;
+}
+
+.content-div {
+	width: 230px;
+	margin-top: 15px;
+	float: left;
+}
+
+.canceldiv {
+	color: rgb(11, 115, 246);
+	text-decoration: underline;
+	font-size: 14px;
+	margin-left: 10px;
+	float: left;
+	margin-top: 25px;
+}
+
+.bui-dialog {
+	top: 150px !important;
+	border-radius: 2px
+}
+
+.initdiv {
+	position: relative;
+	font-size: 15px;
+	border-radius: 2px;
+}
+
+.custom-dialog {
+	border: none;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+
+.custom-dialog .bui-stdmod-header,.custom-dialog .bui-stdmod-footer {
+	display: none;
+}
+
+.x-datepicker-month-custom {
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	cursor: pointer;
+	font-weight: bold;
+}
+
+.bui-calendar:before {
+	border-left: 0px;
+	border-right: 0px;
+}
+
+.bui-calendar:after {
+	border-left: 0px;
+	border-right: 0px;
+	border-bottom: 0px;
+	border-top: 0px;
+}
+
+#openForm {
+	margin-left: 50px;
+}
+/*整体div*/
+.wholePanel {
+	border: solid;
+	height: 480px;
+	padding: 0px;
+	border-width: 3px 3px 3px 3px;
+}
+/*整体div*/
+.wholePanel {
+	border: solid;
+	height: 480px;
+	padding: 0px;
+	border-width: 3px 3px 3px 3px;
+}
+
+.editPanel {
+	height: 480px;
+	text-align: center;
+}
+
+/*全局背景配色-01*/
+.backcolor {
+	background-color: rgb(92, 173, 255);
+}
+/*全局边框配色*/
+.bordercolor {
+	border-color: rgb(92, 173, 255);
+}
+
+.right-top-icon {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	color: white;
+	background-color: red;
+	padding: 0px;
+	margin: 0px;
+	line-height: 14px;
+	font-size: 10px;
+}
+
+.icon-define {
+	margin-top: 3px;
+	margin-right: 5px;
+}
+
+form {
+	padding: 25px;
+}
+
+input[type="radio"] {
+	margin-top: 6px;
+}
+
+.restDay {
+	background-color: rgb(255, 234, 253);
+}
+
+.period {
+	border-radius: 0px !important;
+}
+
+.bui-calendar {
+	width: 678px !important;
+	height: 468px;
+	border: 0px;
+	font-size: 15px;
+}
+
+.bui-calendar .bui-calendar-panel th {
+	width: 43px;
+	font-size: 16px;
+	padding: 28px 36px;
+}
+
+td,th {
+	padding: 0px;
+	line-height: 35px;
+	position: relative;
+}
+
+.head-date {
+	font-size: 15px;
+	padding-top: 15px;
+	padding-bottom: 10px;
+	text-align: center;
+	color: white;
+	margin-left: 0px;
+}
+
+.day-date {
+	font-size: 75px;
+	text-align: center;
+	padding-top: 10px;
+	padding-left: 73px;
+	line-height: 40px;
+	height: 120px;
+}
+
+span.day-span {
+	padding: 37px 20px 37px 20px;
+	width: 82px;
+	margin: auto;
+	background-color: rgb(243, 243, 97);
+	border-radius: 2px;
+}
+
+.span-edit {padding-top ： 10px;position;
+	width: 100%;
+	margin-left: 0px;
+}
+
+.date-tip {
+	font-size: 20px;
+	padding-top: 30px;
+	padding-bottom: 10px;
+	color: rgb(218, 67, 67);
+}
+
+.button-small-customized {
+	padding: 8px 20px;
+	font-size: 16px;
+	border-radius: 0px;
+}
+
+.month-text-container {
+	font-size: 18px;
+}
+
+.tab-left,.tab-right {
+	margin: auto;
+}
+
+#day {
+	padding-bottom: 10px;
+}
+
+#bar2 {
+	padding-top: 15px;
+}
+
+.x-datepicker-disabled-defined {
+	
+}
+
+.bui-monthpicker.bui-overlay.bui-ext-position {
+	left: 681px !important;
+	height: 474px;
+	width: 267px !important;
+	background-color: rgb(248, 242, 165);
+	border: 3px solid rgb(248, 242, 165);
+	border-left: 0;
+	margin-top: -2px;
+	margin-bottom: 3px;
+}
+
+.bui-monthpicker .bui-calendar-month-panel {
+	width: 130px;
+}
+
+.bui-monthpicker .bui-calendar-year-panel {
+	margin-left: 140px;
+}
+
+.strike-define {
+	border: 1px solid rgb(233, 47, 47);
+	position: absolute;
+	width: 14px;
+	top: 22px;
+	left: 40px;
+}
+
+.i-icon-arrow-png {
+	width: 25px;
+	height: 30px;
+	margin-top: -3px;
+}
+
+legend {
+	width : 77%;
+	margin : auto;
+	margin-bottom : 20px;
+}
+
+.baseinfo legend {
+width: 95%;
+}

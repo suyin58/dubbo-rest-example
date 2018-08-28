@@ -1,0 +1,386 @@
+<style>
+      body，div,p,h1,h2,h3,h4,h5,h6,ul,li,{margin:0;padding:0}
+      #header{
+          background: none repeat scroll 0 0 #eff4fa;
+          border-bottom: 1px solid #d6dfea;
+          height: 62px;
+          min-width: 1024px;
+          overflow: hidden;
+      }
+      .login_logo{
+        padding : 10px 0;
+        padding-left: 80px;
+
+      }
+      .login_logo h2{
+          color :rgb(56,187,230);;
+         
+          font-size: 24px;
+          font-weight: 700;
+          display: inline;
+          padding-top: 30px;
+       }
+       .login_logo h3{
+           color : rgb(56,207,255);
+          font-size: 20px;
+          font-weight: 700;
+          display: inline;
+          padding-top: 30px;
+       }
+      #header img{
+         height: 50px;
+        margin-top: -5px;
+        width: 45px;
+      }
+      .panel{
+         min-height: 200px;
+         width: 350px;
+      }
+      #login{
+         left: 60%;
+        margin-left: 90px;
+        padding: 13px 14px 15px;
+        position: absolute;
+        top: 53px;
+        width: 260px;
+        z-index: 2;
+       background-color: #F1F4F5;
+      }
+      #login .panel-header{
+           background-color: #F1F4F5;
+           color: rgb(56, 187, 230);
+          font-weight: 700;
+			border-bottom: 1px solid #ccc;
+      }
+      #login .control-label{
+         color: #777;
+	    font-size: 14px;
+	    font-weight: 700;
+	    width:111px;
+      }
+      #login .control{
+          display: inline;
+      }
+      #login input{
+       color: #333;
+          font-weight:700;
+	    font-size: 16px;
+	    height: 22px;
+	    line-height : 22px;
+	    ime-mode: disabled;
+	    margin-left: 15px;
+	    padding: 7px 20px 7px 34px;
+	    width: 200px;
+      }
+      #login input.verify_code{
+       width: 60px;
+      }
+      #login .forget-pwd{
+          float: right;
+      }
+      #login .error_info{
+      	float:left;
+      }
+      #login button{
+           margin-left: 20px;
+              width: 93%;
+              height: 36px;
+              font-size: 18px;
+              background-color: rgb(56, 187, 230);
+              margin-bottom: 50px;
+      }
+       #login  [class*="span"] {
+        margin-left: 0px;
+    }
+      #login .error_info{
+           color: red;
+        font-size: 14px;
+        padding-left: 30px;
+        height: 20px;
+      }
+      #login a,img{
+      	cursor:pointer;
+      }
+      #footer{
+           background-color: #eff4fa;
+            border-top: 1px solid #d6dfea;
+            bottom: 0;
+            clear: both;
+            color: #b6b6b6;
+            left: 0;
+            padding-bottom: 1px;
+            padding-top: 1px;
+            position: fixed;
+            right: 0;
+            text-align: center;
+            z-index: 80;
+      }
+      #footer ul{
+        line-height: 34px;
+         color: #777;
+      }
+      #footer li{
+        display: inline;
+      }
+      #content{
+        min-height: 531px;
+        background: url("$!{contextPath}/static/images/login/login-background.jpg") no-repeat scroll  30% 0% transparent;
+      	background-color:#FAFAFA;
+      }
+      .bui-dialog .bui-stdmod-header{
+      	*height:0px;
+      }
+      .visible{
+      	visibility: visible;
+      }
+      .not_visible{
+      	visibility : hidden;
+      }
+    .inputDiv{
+      position: relative;
+    }
+	
+	.inputDiv i{
+      color:#999;
+        font-size: 12px;
+      left: 24px;
+      position: absolute;
+      top: 12px;
+      visibility : visible;
+    }
+    
+    .inputDiv .placeholder{
+      color:#999;
+        font-size: 12px;
+      left: 50px;
+      position: absolute;
+      top: 9px;
+      visibility : hidden;
+    }
+    .showPlaceholder  .placeholder{
+      visibility :visible;
+      cursor:text;
+    }
+    </style>
+<div id="header"> 
+   <div class="clearfix"> 
+    <div class="login_logo"> 
+      <img src="$!{contextPath}/static/images/login/logo.png" />
+      <h2>后台系统</h2> 
+      <h3>业务运维平台</h3> 
+    </div> 
+   </div> 
+  </div> 
+  <div id="content" class="clearfix"> 
+        <div id="login" class="panel">
+        	<form  id="loginForm" method="post" autocomplete="off">
+               <div class="panel-header clearfix">
+                    <h3 class="pull-left" >登录业务运维平台</h3>
+               </div>
+                 <div class="row">
+                    <div class="error_info not_visible">$!{exception}</div>
+                  </div>
+                <div class="row">
+                  <div class="control-group span8 inputDiv showPlaceholder">
+                      <div class="control">
+	                      <i class="icon-user"></i>
+	                      <input class="input-normal control-text bui-form-field" type="text" id ="operCode" name="operCode" value="" />
+	                      <label class="placeholder">用户名</label>
+                      </div>
+                    </div>
+               </div>
+                <div class="row">
+                      <div class="control-group span8 inputDiv showPlaceholder">
+                          <div class="control">
+                          	  <i class="icon-lock"></i>
+	                          <input class="input-normal control-text bui-form-field" id="operPwd" type="password" value=""/>
+	                          <label class="placeholder">密码</label>
+	                          <input type="hidden" name="operPwd"/>
+                          </div>
+                    </div>
+               </div>
+               <!--
+			   <div class="row checkCodeDiv hide">
+			   -->
+			    <div class="row checkCodeDiv">
+                	  <div style="display:none">$!{NEED_CHECK_CODE}</div>
+                      <div class="control-group span8 inputDiv showPlaceholder">
+                          <div class="control">
+                                  <i id="verifyCodeSuccess" class="icon-ok hide"></i>
+                                  <input id="verifyCode" class="input-normal control-text bui-form-field verify_code" type="text" maxlength="4" name="checkCode"/>
+                                  <label class="placeholder">验证码</label>
+                                  <img id="checkCodeImg" src="logon/getCheckCode.json"/>
+                                    <a id="refresh" >换一张</a>
+                          </div>
+                    </div>
+               </div>
+               <div class="row ">
+                  <a class="forget-pwd">忘记密码了?</a>
+               </div>
+               </form>
+               <div class="row">
+                   <script type="text/javascript">
+		                 var loginHtml="<button class='button button-primary'  type='button' id='btnLogin'>登&nbsp;&nbsp;&nbsp;&nbsp;录</button>";
+						 document.write(loginHtml);
+                 </script>
+               </div>
+        </div>
+  </div> 
+  <div id="footer"> 
+      <div class="clearfix"> 
+        <ul>
+              <li>平台联系方式：QQ:609061217 &emsp;|&emsp;</li>
+              <li>邮箱：suyin58@gmail.com</li>
+        </ul>   
+      </div>
+  </div>  
+  
+<script type="text/javascript">
+
+ $("#verifyCode").live("keyup",function(){
+	       var params={"checkCode":$("#verifyCode").val()};
+	       $.ajax({
+				url : "$!{contextPath}/logon/checkVerifyCode.json",
+				data : params,
+				type : "POST",
+				cache : false,
+				success : function(data) {
+					if(data.code == 0){
+					   $("#verifyCodeSuccess").removeClass("hide");
+					}else{
+					   $("#verifyCodeSuccess").addClass("hide");
+					}
+				},
+				error : function() {
+					BUI.Message.Alert("系统异常");
+				}
+			});
+	    });
+
+$(document).ready(function () {
+    var cookie = BUI.Cookie; 
+    // 读取cookie用户名
+    if(cookie.get("oper_code")){
+    	$("#operCode").val(cookie.get("oper_code"));
+    }  
+    //登录按钮绑定回车事件
+      $(function(){
+		document.onkeydown = function(e){ 
+		    var ev = document.all ? window.event : e;
+		    if(ev.keyCode==13) {
+		           var button = document.getElementById('btnLogin');  
+		           button.click();
+		     }
+		}
+	  }); 
+		       
+
+	//点击登录按钮事件：验证用户名和密码
+    $("#btnLogin").click(function(){
+	    	if(checkVerifyIsOk()){
+	    		loginFunc();
+	    	}	
+    });
+	
+	
+	$("#refresh").click(function(){
+    	$("#checkCodeImg").trigger("click");
+    });
+    $("#checkCodeImg").click(function(){
+	    $("#verifyCodeSuccess").addClass("hide");
+    	var url = "logon/getCheckCode.json";
+    	url = url + "?" + Math.random();
+    	$("#checkCodeImg").attr("src", url);
+    });
+    $(document).keydown(function(ev){
+    	if(ev.keyCode == '13'){
+    		$("#btnLogin").trigger('click');
+    	}
+    });
+	
+	$('.forget-pwd').click(function(ev){
+    	// BUI.Message.Alert("密码忘记了?你是SB吗?");
+    	location.href = "pwdReset";
+    });
+	
+	var loginedName="登&nbsp;&nbsp;&nbsp;&nbsp;录";
+		 
+	function loginFunc(){
+		//提交登录请求
+		var password=$.md5($("#operPwd").val());
+		url = "logon/login.json";
+		param = {"operCode":$("#operCode").val(),"operPwd":password};
+		if($("#checkCode")) {
+			param.checkCode = $("#verifyCode").val();
+		}
+		logining();
+		$.post(url,param,function(result){
+				if(result.code == 0){
+					location.href = "./index.htm";
+				}else if(result.code > 0){
+					  $("#checkCodeImg").trigger("click");
+				      logined(loginedName);
+					 $('.error_info').removeClass('not_visible').html(result.msg);
+					  
+				}else{
+				     logined(loginedName);
+					$('.error_info').removeClass('not_visible').html(result.msg);
+				}
+		});
+	}
+	
+	function checkVerifyIsOk(){
+    	var errorInfo = "";
+    	if(!$.trim($("input[name='operCode']").val())){
+    		errorInfo = "用户名不能为空!";
+    	}else if(!$.trim($("#operPwd").val())){
+    		errorInfo = "密码不能为空!";
+    	}else if(!$("input[name='checkCode']").closest('.row').hasClass('hide') && !$.trim($("input[name='checkCode']").val())){
+    		errorInfo = "验证码不能为空!";
+    	}else if( $("#verifyCodeSuccess").hasClass("hide")&&!$("input[name='checkCode']").closest('.row').hasClass('hide')){
+	    	   errorInfo = "验证码不对!";
+	    }
+    	
+    	$('.error_info').removeClass('not_visible').html(errorInfo);
+    	return errorInfo ? false:true;
+    }
+	
+	(function(ev){
+    	//如果有exception则隐藏
+    	//if($('.checkCodeDiv:contains("$!{NEED_CHECK_CODE}")').size()){
+    	//	$('.checkCodeDiv').removeClass('hide');
+    	//}
+	    })();
+	     $('.inputDiv input').bind('propertychange',function(ev){
+	    	togglePlaceholder(this);
+	    });
+	   
+	    $('.inputDiv input').bind('input',function(ev){
+	    	togglePlaceholder(this);
+	    });
+	    $('.placeholder').click(function(ev){
+	    	$(this).prev('input').trigger('focus');
+	    })
+	    $('.inputDiv input').each(function(){
+	   		 togglePlaceholder(this);
+	    });
+	    
+	    function togglePlaceholder(obj){
+	    	if($.trim($(obj).val())){
+	    		$(obj).closest('.inputDiv').removeClass('showPlaceholder');
+	    	}else{
+	    		$(obj).closest('.inputDiv').addClass('showPlaceholder');
+	    	}
+	    }	
+
+    $("#refresh").click(function(){
+    	$("#checkCodeImg").trigger("click");
+    });
+    $("#checkCodeImg").click(function(){
+    	var url = "logon/getCheckCode.json";
+    	url = url + "?" + Math.random();
+    	$("#checkCodeImg").attr("src", url);
+    });
+	
+});
+</script>

@@ -1,0 +1,6 @@
+#if($mediaType=='JSON')
+{"exception":"$!exception.message"}
+#end
+#if($mediaType=='XML')
+<exception>$!{message}</exception>
+#end

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<toolbox>
+    <xhtml>true</xhtml>
+    <tool>
+        <key>stringUtils</key>
+        <scope>application</scope>
+        <class>org.apache.commons.lang3.StringUtils</class>
+    </tool>
+    <tool>
+        <key>dateUtil</key>
+        <scope>application</scope>
+        <class>com.wjs.common.util.DateUtil</class>
+    </tool>
+</toolbox>

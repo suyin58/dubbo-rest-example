@@ -1,0 +1,2 @@
+dubboInvokeFilter=com.wjs.common.filter.DubboInvokeFilter
+zipkinDubboFilter=com.wjs.common.zipkin.ZipkinDubboFilter

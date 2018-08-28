@@ -1,0 +1,71 @@
+##2013-7-12 XIE BUG #5306
+#macro(pagelet $url $params)
+		#set($pagelet="")
+		#if($url)
+			#if($asyncContain)
+					#set($pagelet=$asyncContain.get($url))
+    		#else
+    			#set($pagelet=$contain.get($url))
+			#end
+			#if($params)
+				#foreach($key in $params.keySet())
+					#set($pagelet=$pagelet.put($key,$params.get($key)))
+				#end
+			#end
+			$pagelet
+		#end
+#end
+#macro(pagelet_end)
+	#if($asyncContain)
+		#if($asyncContain.isEmpty())
+			<script type="text/javascript">
+				BigPipe.start();
+			</script>
+		#else
+			$asyncContain.export()
+		#end
+	#else 
+		<script type="text/javascript">
+			BigPipe.start();
+		</script>
+	#end
+#end
+#macro(css $path)
+	#if($asyncContainContext)
+		$asyncContainContext.addCss("$path")
+	#else
+		<script type="text/javascript">
+			BigPipe.onArrive({"id":new Date().getTime(),"html":"","js":[],"css":["$path"],"jsCode":""});
+		</script>
+	#end
+#end
+#macro(js $path)
+	#if($asyncContainContext)
+		$asyncContainContext.addJs("$path");
+	#else
+		<script type="text/javascript">
+			BigPipe.onArrive({"id":new Date().getTime(),"html":"","js":["$path"],"css":[],"jsCode":""});
+		</script>
+	#end
+#end
+#macro ( direct $direct-output )$!direct-output#end
+#macro ( c $paras )
+	#if($!paras)
+		#set($content = "")
+		#set($key = "")
+		#set($value = "")
+		#foreach($para in $paras)
+			#if($velocityCount == 1)
+				#set($content = $contain.get($!para))
+			#else
+				#if($velocityCount % 2 == 0)
+					#set($key = $para)
+				#else
+					#set($value = $para)
+				#end
+				#set($content = $content.setParameter($key, $value))
+			#end
+		#end
+		$!content
+	#end
+#end

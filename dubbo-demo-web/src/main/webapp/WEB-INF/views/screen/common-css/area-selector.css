@@ -1,0 +1,138 @@
+.mod_list_province a{
+	cursor:pointer;
+	color:#325E7F
+}
+.mod_list_province a:link,.mod_list_province a:visited{
+	cursor:pointer;
+	text-decoration:none
+}
+.mod_list_province a:hover,.mod_list_province a:active{
+	cursor:pointer;
+	text-decoration:none
+}
+.cityListDiv{
+	position:absolute;
+	border:1px solid #9E9E9E;
+	border-radius:5px;
+	font-family:Microsoft YaHei,Verdana,arial0;
+	width:450px;
+}
+
+.mod_list_province{
+	margin:0;
+	padding:0;
+	font-family:Microsoft YaHei,Verdana,arial0;
+	font-size:14px;
+	position:absolute;
+	width:550px;
+	background-color:#FFFFFF;
+	border:2px solid #eee;
+    border-radius:5px;
+	width:550px;
+	background-color:#FFFFFF;
+	border:1px solid #9E9E9E;
+	display:none;
+	z-index:9999
+}
+.mod_list_province .province_top{
+	border-bottom:0px solid #CCCCCC;
+	padding-top:5px;
+	padding-left:15px;
+	padding-right:0px;
+	padding-bottom:0px;
+	height:50px;
+	line-height:25px
+}
+.mod_list_province .province_top strong{
+	display:inline;
+	float:left;
+	text-align:left
+}
+.hot strong{
+	display:inline;
+	width:80px;
+}
+.mod_list_province a{
+	color:#325E7F;
+	cursor:pointer;
+	margin-right:9px;
+}
+.mod_list_province  a{
+	margin-right:5px;
+	cursor:pointer;
+}
+.mod_list_province .hot{
+	height:25px;
+	border-bottom:1px solid #CCCCCC;
+	padding-top:0px;
+	padding-left:15px;
+	padding-right:15px;
+	padding-bottom:5px;
+	line-height:25px
+}
+.mod_list_province .list_wrap h4{
+	font-size:12px;
+	height:25px;
+	line-height:25px;
+	margin-top:5px
+}
+.mod_list_province .list_wrap{
+	height:175px;
+	overflow:auto;
+	width:550px
+}
+.mod_list_province .list_wrap .province_cont{
+	padding-right:15px;
+	width:500px
+}
+.mod_list_province .list_wrap .mod_province_list a{
+	padding:4px;
+	display:inline-block;
+	cursor:pointer;
+	font-size:12px
+	
+}
+.mod_list_province .list_wrap .mod_province_list .col1{
+	width:30px;
+	font-size:12px
+}
+.mod_list_province .list_wrap .mod_province_list .col2{
+	width:500px;
+	font-size:12px
+}
+.mod_list_province .list_wrap .mod_province_list th{
+	text-align:left
+}
+.mod_list_province .list_wrap .mod_province_list th span{
+	display:inline-block;
+	width:90px;
+	font-weight:900;
+	text-align:center
+}
+.province_top th span{
+	display:inline-block;
+	width:80px;
+	font-weight:900;
+	text-align:left
+}
+.hot th span{
+	display:inline-block;
+	width:80px;
+	font-weight:900;
+	text-align:left
+}
+.province_top a {
+    cursor: pointer;
+    display: inline-block;
+    font-size: 12px;
+}
+.hot a {
+    cursor: pointer;
+    display: inline-block;
+    font-size: 12px;
+}
+.icon-remove{
+	margin-bottom:15px;
+	margin-right:15px;
+	cursor: pointer;
+}

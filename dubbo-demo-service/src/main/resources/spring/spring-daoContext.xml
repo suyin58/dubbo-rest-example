@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-3.0.xsd
+    http://www.springframework.org/schema/tx
+    http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+    http://www.springframework.org/schema/jdbc
+ 	http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd
+ 	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+
+	<!-- 配置数据源-member -->
+	<bean id="dataSource-member" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="${member.jdbc.driverClassName}" />
+		<property name="url" value="${member.jdbc.url}" />
+		<property name="username" value="${member.jdbc.username}" />
+		<property name="password" value="${member.jdbc.password}" />
+		<property name="maxActive" value="${jdbc.maxActive}"></property> 
+		<property name="maxIdle" value="${jdbc.maxIdle}"></property> 
+		<property name="validationQuery" value="select 1"></property> 
+	</bean>
+	<bean id="sqlSessionFactory-member" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource-member" /> 
+		<property name="mapperLocations">
+			<list>
+				<value>
+					classpath*:com/wjs/member/dao/mapper/**/*Mapper.xml
+				</value>
+			</list>
+		</property>
+		<property name="plugins">
+			<list>
+				<!-- 分页处理 -->
+				<ref bean="pagePlugin" />
+				<!-- 日志处理 -->
+				<!-- 
+				<ref bean="logPlugin" />
+				 -->
+			</list>
+		</property>
+	</bean>
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.wjs.member.dao" />
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory-member" />
+	</bean>
+
+	<bean id="TransactionManager_member"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource-member"></property>
+	</bean>
+	<tx:annotation-driven transaction-manager="TransactionManager_member"
+		proxy-target-class="true" />
+		
+		
+		
+	<!-- 分页控件 -->
+	<bean id="pagePlugin" class="com.wjs.common.dao.page.PagePlugin">
+		<property name="pageMethod" value="pageByExample" />
+	</bean>
+	<!-- 日志空间 -->
+	<bean id="logPlugin" class="com.wjs.common.log.LbcMybatisInterceptor"/>
+
+</beans>

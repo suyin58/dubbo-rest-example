@@ -1,0 +1,49 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+   <div class="h-screen layout" fit="true" $horn.paramsCache($frame.screen)>
+		#if($frame.screen)
+    	<div class="h-screen-tab" region="north">
+        	<div class="h-screen-tab-prev"><i></i></div>
+            <div class="h-screen-tab-con">
+                <ul style="padding-left: 156px;">
+					#if($frame.screen.homePage)
+                    <li tabId="_homePage" title="$!{frame.screen.homePage.title}" class="home_page active" url="$!{frame.screen.homePage.url}" ><i class="h-i-$!{frame.screen.homePage.icon}"></i><span>$!{frame.screen.homePage.title}</span></li>
+					#end
+					#foreach($screenPage in $frame.screen.items)
+						<li tabId="$!{screenPage.id}" url="$!{screenPage.url}" title="$!{screenPage.title}" >
+							<i class="h-i-$!{screenPage.icon}"></i>
+							<span>$!{screenPage.title}</span>
+							#if($screenPage.closeable != false)<span class="h-tab-close"></span>#end
+						</li>
+					#end
+                </ul>
+            </div>
+            <div class="h-screen-tab-next"><i></i></div>
+            <!--
+			#if($frame.screen.zoomAble != false)
+           <div class="h-screen-tab-zoom" title="视图缩放"></div>
+			#end
+
+-->
+            <div class="h-screen-tab-set" title="视图工具栏">
+            	<ul>
+                	<li class="h-set-close"><span></span></li>
+                	<li><a href="javascript:Horn.Frame.screen.closeCurrent()">关闭当前选项卡</a></li>
+                    <li><a href="javascript:Horn.Frame.screen.closeAll()">关闭全部选项卡</a></li>
+                    <li><a href="javascript:Horn.Frame.screen.closeOther()">关闭当前以外选项卡</a></li>
+					#if($frame.screen.tools)
+                    <li class="h-set-line"><span></span></li>
+					#foreach($screenToolItem in $frame.screen.tools)
+						<li>#if($screenToolItem.html)$!{screenToolItem.html}#else<a title="$!{screenToolItem.title}" #if($screenToolItem.url)href="$!{screenToolItem.url}" #else href="javascript:void" #end #if($screenToolItem.onclick) onclick="$!{screenToolItem.onclick}" #end>$!{screenToolItem.title}</a>#end</li>
+					#end
+					#end
+                </ul>
+            </div>
+        </div>
+        <div class="h-screen-con" region="center">
+			#if($frame.screen.homePage)
+        	<iframe tabid="_homePage" style="display:inline-block;" src="$!{frame.screen.homePage.url}"  frameborder="0" width="100%" height="100%" scrolling="auto"></iframe>
+			#end
+        </div>
+		#end
+    </div>

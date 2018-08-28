@@ -1,0 +1,167 @@
+/* 错误页样式 */
+html,
+body,
+h1,
+h2,
+h3,
+form,
+p,
+ul,
+li {
+  margin: 0;
+  padding: 0;
+}
+html,
+body {
+  height: 100%;
+  background-color: #e8f3fd;
+}
+ol,
+ul,
+li {
+  list-style: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+table th {
+  white-space: nowrap;
+}
+table td {
+  word-break: break-all;
+}
+a {
+  color: #5d82c0;
+  text-decoration: none;
+}
+
+.error-404{
+	width: 100%;
+	height: 100%;
+	background: url('../images/404-bee.png') no-repeat 230px -10px;
+	text-align: center;
+}
+
+.error-404 .go {
+	text-decoration: underline;
+	position: absolute;
+	top: 508px;
+	right: 388px;
+	color: #FFF;
+	font-family: Tahoma;
+	font-size: 25px;
+	-webkit-font-smoothing: antialiased;
+	filter/*\**/: chroma( color=#FFFFFF ) /*\**/;
+}
+.error-500{
+	width: 100%;
+	height: 100%;
+	text-align: center;
+}
+
+body > .lbc-head {
+  width: 100%;
+  min-width: 1180px;
+  height: 82px;
+  background: url("../../common/images/headbg.png") 0 -63px repeat-x;
+}
+body > .lbc-head > .head {
+  width: 1000px;
+  height: 82px;
+  margin: 0 auto;
+  position: relative;
+}
+body > .lbc-head > .head .logo {
+  position: absolute;
+  padding-top: 23px;
+  left: 0;
+}
+body > .lbc-head > .head .logo a {
+  display: block;
+  width: 459px;
+  height: 41px;
+  background: url("../../common/images/logo.png") 0 0 no-repeat;
+  text-indent: -999px;
+}
+body > .lbc-head > .head > span.user {
+  position: absolute;
+  right: 0;
+  line-height: 82px;
+  font-size: 14px;
+  color: #fff;
+}
+body > .lbc-head > .head > span.user strong {
+  background: url("../../common/images/headbg.png") right 10px no-repeat;
+  padding: 20px 17px 20px 0;
+  margin-right: 15px;
+}
+body > .lbc-head > .head > span.user a {
+  color: #a6d3ff;
+}
+body > .lbc-content {
+  width: 1000px;
+  height: 100%;
+  display: table;
+  border: solid 1px #e6e6e6;
+  margin: 16px auto;
+  background-color: #FFF;
+}
+body > .lbc-content  .error-main {
+	width: 100%;
+	margin: 30px;
+	font: 14px/1.5em "微软雅黑", Arial, Helvetica, sans-serif;
+}
+body > .lbc-content  .error-main .message {
+	height: 42px;
+	line-height: 42px;
+	font-size: 30px;
+}
+body > .lbc-content  .error-main .message i {
+	display: block;
+	float: left;
+	width: 42px;
+	height: 42px;
+	background: url("../images/error.png");
+}
+body > .lbc-content  .error-main .operation {
+	margin-top: 10px;
+	padding-left: 42px;
+}
+body > .lbc-content  .error-main .operation a {
+	cursor: pointer;
+	margin: 0 5px;
+	text-decoration: underline;
+}
+body > .lbc-foot {
+  width: 100%;
+  padding: 20px 0;
+}
+body > .lbc-foot > div {
+  width: 100%;
+  float: left;
+  text-align: center;
+}
+body > .lbc-foot .trust a {
+  display: inline-block;
+  height: 40px;
+}
+body > .lbc-foot .trust a.trl {
+  width: 123px;
+  margin-left: 20px;
+  background: url("../../common/images/bg.png") -153px -81px no-repeat;
+}
+body > .lbc-foot .trust a.trr {
+  width: 103px;
+  margin-left: 6px;
+  background: url("../../common/images/bg.png") -173px -34px no-repeat;
+}
+body > .lbc-foot .copyright {
+  text-align: center;
+  margin: 10px 0;
+}
+body > .lbc-foot .copyright a {
+  color: #14549C;
+  margin: 0 14px;
+  text-decoration: none;
+}

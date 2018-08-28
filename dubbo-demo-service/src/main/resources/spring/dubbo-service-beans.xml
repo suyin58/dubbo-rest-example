@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://code.alibabatech.com/schema/dubbo
+    http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+ 
+    <!-- 提供方应用信息，用于计算依赖关系 -->
+    <dubbo:application name="com.wjs.member.service" owner="com.wjs.member.service" organization="member"/>
+	<!-- 监控中心配置 从注册中心发现监控中心地址 -->
+	<dubbo:monitor protocol="registry"/>
+	
+    <dubbo:annotation package="com.wjs.member.service"/>
+ 
+    <!-- 使用zookeeper广播注册中心暴露服务地址 -->
+	<dubbo:registry id="memberRegistry" protocol="${dubbo.registry.protocol}"  group="${dubbo.registry.group}"
+		register="${dubbo.registry.register}" address="${dubbo.registry.address}" />		
+ 	
+	<!-- 用dubbo协议在端口暴露服务 -->
+	<dubbo:protocol name="dubbo" port="10097" />  
+	
+	<!-- 新增rest 协议在端口暴露服务-->
+    <dubbo:protocol name="rest" server="tomcat" port="9090" extension="com.wjs.member.plugin.intercepter.RestContextInteceptor,com.wjs.member.plugin.intercepter.LoginIntercepter"/>  
+	
+	<!-- 引用服务监听
+    <dubbo:consumer filter="dubboInvokeFilter,zipkinDubboFilter" />
+	<dubbo:provider filter="dubboInvokeFilter,zipkinDubboFilter" />
+	 -->
+    
+    
+    <!-- 声明需要暴露的服务接口 -->
+    <dubbo:service interface="com.wjs.member.service.deduct.PathNoneServer" ref="pathNoneServer" registry="memberRegistry" retries="0" timeout="10800" />
+    <dubbo:service interface="com.wjs.member.service.deduct.PathParam_QueryParamService" ref="pathParam_QueryParamService" registry="memberRegistry" retries="0" timeout="10800" />
+    <dubbo:service interface="com.wjs.member.service.deduct.QueryParam_FromParamService" ref="queryParam_FromParamService" registry="memberRegistry" retries="0" timeout="10800" />
+	<!-- 文件上传下载 -->
+	<dubbo:service interface="com.wjs.member.service.file.FileDubboRestExample" ref="fileDubboRestExample" registry="memberRegistry" retries="0" timeout="10800" />
+	
+	<!-- 返回值封装测试 -->
+	<dubbo:service interface="com.wjs.member.service.wrap.ResultWrapService" ref="resultWrapService" registry="memberRegistry" retries="0" timeout="10800" />
+	
+</beans>

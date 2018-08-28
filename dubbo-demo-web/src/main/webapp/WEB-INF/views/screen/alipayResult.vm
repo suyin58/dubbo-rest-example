@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+ <head> 
+  <meta charset="utf-8" /> 
+  <title>网金所平台系统</title> 
+  <script src="$appServer.get('js/jquery-1.8.1.min.js')"></script>
+  <link rel="shortcut icon" href="$appServer.get('images/favicon.ico') type="image/x-icon" /> 
+    <link href="$appServer.get('css/exception/exception.css')" rel="stylesheet" /> 
+ </head>  
+ <body> 
+  <div id="errorInfo"> 
+   <img src="images/login/error.gif" style="width:150px;margin-top: 35px;"> 
+	<div class="tipBox">
+      
+   <div class="tip">温馨提示:</div>
+   <legend class="legend">  </legend>
+   <div id="info" style="font-size:18px;">
+    <div>
+    #if($!{error})
+		调用支付宝接口失败，失败原因为：<br/>&emsp;&emsp;<b>${error}</b><br/><span id="seconds">10</span>秒后系统将自动关闭该页面
+	#else
+		调用支付宝接口成功 ,$!{success},<span id="seconds">10</span>秒后系统将自动关闭该页面
+	#end
+   
+    </div> 
+   </div> 
+  </div>
+</div>
+  <script type="text/javascript">
+      var seconds = 10;
+      document.onload = watch();
+      function watch() {
+      		setInterval(function() {
+      			seconds--;
+				if(seconds > 9) {
+					$("#seconds").text(seconds);
+				}
+				else {
+					$("#seconds").text("0" + seconds);
+				}
+      			
+      			if(seconds <= 0) {
+      				closeWindow();
+      			}
+      		},1000);
+      }
+	  function closeWindow(){
+	  	window.close();
+	  }
+</script>  
+ </body>
+</html>

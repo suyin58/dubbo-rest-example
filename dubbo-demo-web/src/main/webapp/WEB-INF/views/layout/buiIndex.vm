@@ -1,0 +1,14 @@
+
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	$horn.addGlobal("headStyleLinks","/css/bui/dpl-min.css")
+	$horn.addGlobal("headStyleLinks","/css/bui/bui-min.css")
+	$horn.addGlobal("headStyleLinks","/css/bui/main-min.css")
+
+$contain.get('/contain/hornhtml.htm').put('title','网金所平台系统')
+$screen_content
+$contain.get('/contain/end.htm')
+
+
+
+
+
