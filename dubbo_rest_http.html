@@ -1,0 +1,37 @@
+1.JAR包依赖：<br/>
+&nbsp;&nbsp; 1.1:dubbo版本：2.6.0及以上<br/>
+&nbsp;&nbsp; 1.2:org.jboss.resteasy相关jar包<br/>
+2.新增rest协议端口暴露服务<br/>
+&nbsp;&nbsp; &lt;dubbo:protocol name="rest" server="tomcat" port="9090" extension="com.wjs.member.plugin.intercepter.CharacterEncodingFilter,com.wjs.member.plugin.intercepter.LoginIntercepter"/&gt;  <br/>
+3.声明需要暴露的服务接口（同现有方式）<br/>
+&nbsp;&nbsp; &lt;dubbo:service interface="com.wjs.member.service.deduct.DubboDemoDeductTplManageService" ref="dubboDemoDeductTplManageService" registry="memberRegistry" retries="0" timeout="10800" /&gt;<br/>
+4.修改dubbo service实现，提供rest访问路径<br/>
+&nbsp;&nbsp;@Path("demo")<br/>
+&nbsp;&nbsp;public class DemoServiceImpl implements DemoService {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;@GET<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;@Path("greeting")<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;@Produces("application/json; charset=UTF-8")<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;public String sayHello(@QueryParam("name") String name) {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return "Hello " + name;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;}  <br/>	
+
+5.参数获取方式：<br/>
+&nbsp;&nbsp;5.1@PathParam--->url路径问号前的参数<br/>
+<input type=button value="PathParam提交" onclick="location.href='http://127.0.0.1:9090/getbyid/100'"> <br/>
+&nbsp;&nbsp;5.2@QueryParam--->url路径问号后中的参数<br/>
+<input type=button value="QueryParam提交" onclick="location.href='http://127.0.0.1:9090/getbytplid?deductTemplateId=101'"> <br/>
+<br/>
+<input type=button value="Path_Query混合提交" onclick="location.href='http://127.0.0.1:9090/getbymix/100?deductTemplateId=101'"> <br/>
+<br/>
+&nbsp;&nbsp;5.3@FormParam--->x-www.form-urlencoded参数<br/>
+<form action="http://127.0.0.1:9090/deductTpl/list" accept-charset="UTF-8" method="post" >
+	tplId：<input type="input" name="tplId" id="tplId" value="15"/><br/>
+	id：<input type="input" name="id" id="id" value="1234"/><br/>
+	<input type="submit" value="提交" />
+</form>
+&nbsp;&nbsp;5.4@BeanParam--->参数自动封装成对象<br/>
+<form action="http://127.0.0.1:9090/deductTpl/listform/15?id=1234" accept-charset="UTF-8" method="post" >
+	tplId：<input type="input" name="deductTemplateId" id="deductTemplateId" value="17"/><br/>
+	<input type="submit" value="提交" />
+</form>
